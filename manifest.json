@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "ChatGPT Avatar Replacer",
+  "version": "0.4.0",
+  "description": "Replaces the default avatar in ChatGPT with a custom base64 encoded imagee",
+  "icons": {
+    "128": "./assets/icon.png"
+  },
+  "permissions": ["activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["https://chat.openai.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
