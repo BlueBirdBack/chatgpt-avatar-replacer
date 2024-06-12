@@ -3,27 +3,22 @@ const avatarImage = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACABAMAA
 function replaceAvatar(node) {
   // Find all the target divs within the node using querySelectorAll
   const targetDivs = node.querySelectorAll(
-    ".pt-0\\.5 > .gizmo-shadow-stroke.flex.h-6.w-6.items-center.justify-center.overflow-hidden.rounded-full > div"
+    "[data-testid='fruit-juice-profile'] > div > div > div > div"
   );
 
   // Loop through each target div and replace the avatar
   targetDivs.forEach((targetDiv) => {
     if (targetDiv.textContent.trim() === "BB") {
       // Replace the inner HTML of the parent div with the new structure
-      targetDiv.parentElement.outerHTML = `<div class="h-6 w-6">
-          <div class="gizmo-shadow-stroke overflow-hidden rounded-full">
-            <img src="${avatarImage}" class="h-full w-full bg-token-main-surface-secondary" alt="GPT" width="80" height="80">
-          </div>
-        </div>`;
+      targetDiv.parentElement.outerHTML = `<img src="${avatarImage}">`;
     }
   });
 }
 
 const observer = new MutationObserver((mutationList) => {
   for (const mutation of mutationList) {
-    if (mutation.type === "childList" && mutation.addedNodes.length) {
-      const addedNodes = mutation.addedNodes;
-      for (let node of addedNodes) {
+    if (mutation.type === "childList") {
+      for (const node of mutation.addedNodes) {
         if (node.nodeType === Node.ELEMENT_NODE) {
           replaceAvatar(node);
         }
@@ -34,6 +29,6 @@ const observer = new MutationObserver((mutationList) => {
 
 observer.observe(document.body, { childList: true, subtree: true });
 
-document.addEventListener("DOMContentLoaded", function () {
-  replaceAvatar();
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//   replaceAvatar(document.body);
+// });
