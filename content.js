@@ -3,7 +3,7 @@ const avatarImage = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACABAMAA
 function replaceAvatar(node) {
   // Find all the target divs within the node using querySelectorAll
   const targetDivs = node.querySelectorAll(
-    "[data-testid='fruit-juice-profile'] > div > div > div > div"
+    "[data-testid='profile-button'] > div > div > div > div"
   );
 
   // Loop through each target div and replace the avatar
